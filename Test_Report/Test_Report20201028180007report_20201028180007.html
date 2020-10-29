@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>自动化测试DEMO</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 120%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">自动化测试DEMO</h1>
+<p class='attribute'><strong>测试人员 : </strong> XiongfeiQiu</p>
+<p class='attribute'><strong>开始时间 : </strong> 2020-10-28 18:00:07</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:49.182442</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 1，通过 1，通过率= 100.00%</p>
+
+<p class='description'>自动化测试.</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 1 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 16px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>Test_watch_vido</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>Buy_classes</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in" align="left">
+    <pre>
+    
+pt1_1: 可选择级别：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="5bfdbdcc-00f7-471d-b36d-da7c00b12761")&gt;]
+幼儿
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="1bbdae49-21e7-4d19-94d9-dbf9bc8b0aed")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="1bbdae49-21e7-4d19-94d9-dbf9bc8b0aed")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="4fb41cc0-ac49-41b4-9d4e-32bb624d88eb")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="1bbdae49-21e7-4d19-94d9-dbf9bc8b0aed")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="4fb41cc0-ac49-41b4-9d4e-32bb624d88eb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="893a2b50-71b5-4506-b7e6-b752fcdd73d5")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="1bbdae49-21e7-4d19-94d9-dbf9bc8b0aed")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="4fb41cc0-ac49-41b4-9d4e-32bb624d88eb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="893a2b50-71b5-4506-b7e6-b752fcdd73d5")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="5d81b37f-78c3-4ea8-9e3c-75feb69b3bca")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="1bbdae49-21e7-4d19-94d9-dbf9bc8b0aed")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="4fb41cc0-ac49-41b4-9d4e-32bb624d88eb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="893a2b50-71b5-4506-b7e6-b752fcdd73d5")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="5d81b37f-78c3-4ea8-9e3c-75feb69b3bca")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6d600f16-d1a0-4129-9a2f-fa6cc61b7a85")&gt;]
+幼儿园
+可选择学科：[&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="99e30377-6e2b-4075-b7aa-52317bff251f")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6fc7a22e-76eb-45a9-8c3b-f21d58ad58d3")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="a0969018-e959-4716-9636-f9a856ad6fc2")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ddf1d09b-dfb0-4d75-9c61-db0ae2f9fbeb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="bd10fb7b-edac-41ae-b38a-412f83b1b363")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="8fbd5591-944b-4477-9e2c-6abf1ccc7c07")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="7b115be3-d339-4c3b-8403-4c713b5a0238")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="9cb4afab-6261-4271-a6ed-cae68c3f0e93")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="15bd8409-1bde-4997-aac9-73934314e8cc")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="21b72cd1-e285-4d19-b19e-2c2a761a2ed1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc49722c-1dcc-47f6-b19f-c2c1b4f0e55e")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="81c6e0b0-cd7e-49d8-bde1-54971fe03af1")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="ead4bad1-a5bd-4d63-b9fa-d25f713c4c3b")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="1bbdae49-21e7-4d19-94d9-dbf9bc8b0aed")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="4fb41cc0-ac49-41b4-9d4e-32bb624d88eb")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="893a2b50-71b5-4506-b7e6-b752fcdd73d5")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="5d81b37f-78c3-4ea8-9e3c-75feb69b3bca")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="6d600f16-d1a0-4129-9a2f-fa6cc61b7a85")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="c56cdcb7-273e-4eaa-b9a2-4e76c9bbb3c7")&gt;]
+幼儿园
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+可选择地域：&lt;selenium.webdriver.remote.webelement.WebElement (session="9b35345c9b9476a13a5908abc2391769", element="fc8b0b4a-ac67-4e8d-b09b-dae8c4c6fa3c")&gt;
+社会
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>通过率：100.00%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>

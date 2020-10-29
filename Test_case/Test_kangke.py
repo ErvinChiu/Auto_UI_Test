@@ -5,7 +5,24 @@ import HTMLTestRunnerNew
 import unittest
 import win32con
 import win32gui
-from common.comm import *
+#from common.comm import *
+from selenium import webdriver
+import time
+class public_def:
+    def login(self):
+        driver = webdriver.Chrome()
+        driver.get("https://betaweb.jushixl.net.cn/#/home")
+        driver.implicitly_wait(10)
+        driver.maximize_window()
+        time.sleep(5)
+        driver.find_elements_by_class_name("nav_item")[3].click()
+        time.sleep(3)
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[1]/div[1]/div').click()
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/div[2]/input').send_keys("18515817789")
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/div[4]/input').send_keys("a123456")
+        time.sleep(3)
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/button').click()
+     # 登录结束
 class Test_watch_vido(unittest.TestCase):
         def setUp(self):
             self.driver = webdriver.Chrome()
@@ -147,13 +164,12 @@ class Test_watch_vido(unittest.TestCase):
             time.sleep(5)
             # 选择课程
             driver.find_elements_by_class_name("intro")[0].click()
-            time.sleep(3)
-            # 选择级别
-            driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[1]/span').click()
-            time.sleep(3)
+            time.sleep(2)
+            driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[1]/span').click()#选择中学
+            #time.sleep(3)
             #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[1]/span').click()
             #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span').click()
-            time.sleep(5)
+           # time.sleep(5)
             #tj = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/button')
 
             #dis1=driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[3]/span')
@@ -161,6 +177,7 @@ class Test_watch_vido(unittest.TestCase):
             #a = driver.find_elements_by_class_name("norms_item norms_item_enable")
             #获取级别
            #========级别=======学科========地区=========================
+
 
             a = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[1]/span')
             b = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[2]/span')
@@ -187,65 +204,62 @@ class Test_watch_vido(unittest.TestCase):
             j = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[19]/span')#小学全科
             o = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[20]/span')#幼儿园
 
-            #地区
+            #地区ea
 
-            ar1 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span')  #北京
-            ar2 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[2]/span')  # 天津
-            ar3 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[3]/span')  # 河北
-            ar4 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[4]/span')  # 河南
-            ar5 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[8]/span')  # 重庆
-            ar7 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[7]/span')  # 四川
-            ar6 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[9]/span')  # 江苏
-            ar8 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[10]/span') # 浙江
-            ar9 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[12]/span') # 安徽
-            ar10 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[14]/span') #全国通用
-            ar11 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[15]/span')  # 上海
-            ar12 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[16]/span')  # 校园
+            area1 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span')  #北京
+            area2 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[2]/span')  # 天津
+            area3 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[3]/span')  # 河北
+            area4 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[4]/span')  # 河南
+            area5 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[8]/span')  # 重庆
+            area7 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[7]/span')  # 四川
+            area6 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[9]/span')  # 江苏
+            area8 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[10]/span') # 浙江
+            area9 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[12]/span') # 安徽
+            area10 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[14]/span') #全国通用
+            area11 = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div/div[9]/div/div[2]/div[15]/span')  # 上海
+            area12 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[16]/span')  # 校园
             Jibies = [a,b,c]
             Xuekes = [d,e,f,g,k,i,l,z,x,v,n,m,pp,r,t,y,u,s,j,o]
-            areas = [ar1,ar2,ar3,ar4,ar5,ar6,ar7,ar8,ar9,ar10,ar11,ar12]
+            areas = [area1,area2,area3,area4,area5,area6,area7,area8,area9,area10,area11,area12]
 
             #分别获取级别、班级、地区 状态为True 的元素，并自定义点击选择
             jb = []
             xk =[]
-            area = []
-
-            while len(Jibies) >0:
-                jibie=Jibies.pop()
-                if jibie.is_displayed()==True:
-                    jb.append(jibie)
-                    if len(jb) == 0:
-                        return False
-                    else:
-                        jb[0].click()
-                        print("可选择级别：%r"%jb)
-                        break
+            area=[]
 
             while len(Xuekes) > 0:
-                xueke = Xuekes.pop()
-                if xueke.is_displayed() == True:
-                    xk.append(xueke)
-                    if len(xk) == 0:
-                        return False
-                    else:
+               xueke = Xuekes.pop()
+               if xueke.is_enabled() == True:
+                   xk.append(xueke)
+                   if len(xk) == 0:
+                       return False
+                   else:
+                       xk[0].click()
+                       print("可选择学科：%r" % xk)
+                       print(xk[0].text)
+                       #return xk
+                       #print(xk)
+                       #time.sleep()
+                       break
+           
+            while len(areas) > 0 :
 
-                        xk[0].click()
-                        print("可选择学科：%r" % xk)
-                        break
-                    #time.sleep(3)
+               ar = areas.pop()
+               if ar.is_enabled() == True:
+                   area.append(ar)
+                   if len(area) == 0:
+                       return False
+                   else:
+                       #jb[0].click()
+                       xk[0].click()
+                       area[0].click()
 
-            while len(areas) > 0:
-                ar = areas.pop()
-                if ar.is_displayed() == True:
-                    area.append(ar)
-                    if len(area) == 0:
-                        return False
-                    else:
-                        area[0].click()
-                        print("可选择地域：%r"%area[0])
-                        print("Pass")
-                        #break
+                       print("可选择地域：%r"%area)
 
+
+                       #break"""
+
+            print(area[2].text)
 
         def tearDown(self):
            self.driver.quit()
@@ -282,3 +296,18 @@ if __name__=="__main__":
 
 
 
+
+    """
+    while len(Jibies) > 0:
+              jibie=Jibies.pop()
+              if jibie.is_enabled()==True:
+                  jb.append(jibie)
+                  if len(jb) == 0:
+                      return False
+                  else:
+                      jb[0].click()
+                      print("可选择级别：%r"%jb)
+                      print(jb[0].text)
+                      #return jb
+                      #print(jb)
+                      break """
