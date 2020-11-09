@@ -1,64 +1,57 @@
-#config=utf-8
+
+# coding: utf-8
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
 import smtplib
 from email.mime.text import MIMEText
-from email.header import Header
-import HTMLTestRunnerNew
-import unittest
-import time
-import HTMLTestRunner
+import pathlib
 import os
-from Test_case.Test_kangke import *
 
-#邮件发送
-def send_mail(Auto_UI_report):
-    Reports=open(Auto_UI_report,'rb')
-    maii_body=Reports.read()
-    Reports.close()
-    Msg=MIMEText(maii_body,'html','utf-8')
-    Msg['Subject']=Header("UI自动化测试报告","utf-8")
-    stmp=smtplib.SMTP()
+def send_mail(username, passwd, recv, title, content, mail_host='smtp.qq.com', port=25, file=None):
+    '''
+    发送邮件函数，默认使用qqsmtp
+    :param username: 邮箱账号 xx@qq.com
+    :param passwd: 邮箱密码
+    :param recv: 邮箱接收人地址，多个账号以逗号隔开
+    :param title: 邮件标题
+    :param content: 邮件内容
+    :param mail_host: 邮箱服务器
+    :param port: 端口号
+    :return:
+    '''
+    if file:
+        msg = MIMEMultipart()
+        # 构建正文
+        part_text = MIMEText(content)
+        msg.attach(part_text)  # 把正文加到邮件体里面去
 
-    stmp.connect("smtp.126.com")
-    stmp.login("tester202010@126.com","sakura1991")
-    #邮件发送
-    stmp.sendmail("tester202010@126.com",Msg.as_string())
-    stmp.quit()
-    print("邮件已经发出！")
+        # 构建邮件附件
+        part_attach1 = MIMEApplication(open(file, 'rb').read())  # 打开附件
+        part_attach1.add_header('Content-Disposition', 'attachment', filename =pathlib.Path(file).name)  # 为附件命名
+        msg.attach(part_attach1)  # 添加附件
+    else:
+        msg = MIMEText(content)  # 邮件内容
+    msg['Subject'] = title  # 邮件主题
+    msg['From'] = username  # 发送者账号
+    msg['To'] = recv  # 接收者账号列表
+    smtp = smtplib.SMTP(mail_host, port=port)
+    smtp.login(username, passwd)  # 登录
+    smtp.sendmail(username, recv, msg.as_string())
+    smtp.quit()
 
-    #查找邮件报告目录，获取最新生成的测试报告文件
-def test_report_new(Testreport):
-    lists=os.listdir(Testreport)
-    lists.sort(key=lambda fn: os.path.getmtime(Testreport + '\\' + fn))
-    Auto_UI_report=os.path.join(Testreport,lists[-1])
-    print(Auto_UI_report)
-    return Auto_UI_report
 
-if __name__ == "__main__":
-    testcase_dir = "D:\PycharmProjects\JS_UIAuto_Test\Test_case"
-    restreport="D:\PycharmProjects\JS_UIAuto_Test\Test_Report"
-    discover=unittest.defaultTestLoader.discover(testcase_dir,pattern='Test_*.py')
-    suit = unittest.TestSuite()
-    # suit.addTest(Test_watch_vido("watch_Replay"))
-    # suit.addTest(Test_watch_vido("DingDan"))
-    suit.addTest(Test_watch_vido("Buy_classes"))
-    # 案例执行
-    runner = unittest.TextTestRunner()
-    # 报告路径
-    date_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-    report_abspath = 'report_' + date_time + '.html'
-    Re_local = 'D:\PycharmProjects\JS_UIAuto_Test\Test_Report'
-    report_local = Re_local + date_time + report_abspath
-    # 定义测试报告
+send_address = "2551451515@qq.com"
+send_password = "boqvynjdduztecgj"
+receive_address = "qiuxiongfei@jushiwangedu.com"
+title = "聚师网UI自动化测试报告"
+content = "Hi，你好！此邮件为自动发送，不必回复~详情请查看附件，如有疑问可联系测试组~"
+attachfilepath = r"D:\PycharmProjects\JS_UIAuto_Test\Test_Report"
+lists=os.listdir(attachfilepath)
+lists.sort(key=lambda fn: os.path.getmtime(attachfilepath+"\\"+fn))
+file = os.path.join(attachfilepath,lists[-1])
+send_mail(send_address, send_password, receive_address, title, content, file=file)
+print('send success')
 
-    with open(report_local, 'wb+') as rf:
-        runner = HTMLTestRunnerNew.HTMLTestRunner(
-                rf,
-                2,
-                title='自动化测试DEMO',
-               description='自动化测试.',
-               tester="XiongfeiQiu"
-            )
-    runner.run(discover)  # 运行测试用例
-    rf.close()
-    new_report = test_report_new(Re_local)
-    send_mail(new_report)
+
+
+

@@ -1,0 +1,57 @@
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main createEngine
+信息: Setting up agent: Js_AutoUI_Test
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main$CuiListener <init>
+信息: Jenkins agent is running in headless mode.
+十一月 04, 2020 7:45:08 下午 hudson.remoting.Engine startEngine
+信息: Using Remoting version: 4.5
+十一月 04, 2020 7:45:08 下午 org.jenkinsci.remoting.engine.WorkDirManager initializeWorkDir
+信息: Using D:\PycharmProjects\JS_UIAuto_Test\Test_case\remoting as a remoting work directory
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Locating server among [http://81.70.5.212:8080/]
+十一月 04, 2020 7:45:08 下午 org.jenkinsci.remoting.engine.JnlpAgentEndpointResolver resolve
+信息: Remoting server accepts the following protocols: [JNLP4-connect, Ping]
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Agent discovery successful
+  Agent address: 81.70.5.212
+  Agent port:    39943
+  Identity:      5e:26:e6:1d:4c:1a:3b:d2:e2:3a:01:12:c7:76:17:66
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Handshaking
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Connecting to 81.70.5.212:39943
+十一月 04, 2020 7:45:08 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Trying protocol: JNLP4-connect
+十一月 04, 2020 7:45:09 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Remote identity confirmed: 5e:26:e6:1d:4c:1a:3b:d2:e2:3a:01:12:c7:76:17:66
+十一月 04, 2020 7:45:09 下午 org.jenkinsci.remoting.protocol.impl.ConnectionHeadersFilterLayer onRecv
+信息: [JNLP4-connect connection to 81.70.5.212/81.70.5.212:39943] Local headers refused by remote: Js_AutoUI_Test is already connected to this master. Rejecting this connection.
+十一月 04, 2020 7:45:09 下午 hudson.remoting.jnlp.Main$CuiListener status
+信息: Protocol JNLP4-connect encountered an unexpected exception
+java.util.concurrent.ExecutionException: org.jenkinsci.remoting.protocol.impl.ConnectionRefusalException: Js_AutoUI_Test is already connected to this master. Rejecting this connection.
+	at org.jenkinsci.remoting.util.SettableFuture.get(SettableFuture.java:223)
+	at hudson.remoting.Engine.innerRun(Engine.java:744)
+	at hudson.remoting.Engine.run(Engine.java:519)
+Caused by: org.jenkinsci.remoting.protocol.impl.ConnectionRefusalException: Js_AutoUI_Test is already connected to this master. Rejecting this connection.
+	at org.jenkinsci.remoting.protocol.impl.ConnectionHeadersFilterLayer.newAbortCause(ConnectionHeadersFilterLayer.java:378)
+	at org.jenkinsci.remoting.protocol.impl.ConnectionHeadersFilterLayer.onRecvClosed(ConnectionHeadersFilterLayer.java:433)
+	at org.jenkinsci.remoting.protocol.ProtocolStack$Ptr.onRecvClosed(ProtocolStack.java:816)
+	at org.jenkinsci.remoting.protocol.FilterLayer.onRecvClosed(FilterLayer.java:288)
+	at org.jenkinsci.remoting.protocol.impl.SSLEngineFilterLayer.onRecvClosed(SSLEngineFilterLayer.java:172)
+	at org.jenkinsci.remoting.protocol.ProtocolStack$Ptr.onRecvClosed(ProtocolStack.java:816)
+	at org.jenkinsci.remoting.protocol.NetworkLayer.onRecvClosed(NetworkLayer.java:154)
+	at org.jenkinsci.remoting.protocol.impl.BIONetworkLayer.access$1500(BIONetworkLayer.java:48)
+	at org.jenkinsci.remoting.protocol.impl.BIONetworkLayer$Reader.run(BIONetworkLayer.java:247)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at hudson.remoting.Engine$1.lambda$newThread$0(Engine.java:118)
+	at java.lang.Thread.run(Thread.java:748)
+	Suppressed: java.nio.channels.ClosedChannelException
+		... 7 more
+
+十一月 04, 2020 7:45:09 下午 hudson.remoting.jnlp.Main$CuiListener error
+严重: The server rejected the connection: None of the protocols were accepted
+java.lang.Exception: The server rejected the connection: None of the protocols were accepted
+	at hudson.remoting.Engine.onConnectionRejected(Engine.java:829)
+	at hudson.remoting.Engine.innerRun(Engine.java:769)
+	at hudson.remoting.Engine.run(Engine.java:519)
+
