@@ -7,6 +7,7 @@ import win32con
 import win32gui
 from selenium import webdriver
 import time
+import os
 class public_def():
 
     def login(self):
@@ -121,7 +122,6 @@ class Test_watch_vido(unittest.TestCase):
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[3]').click()
         #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[1]/div[6]/span').click()  # 选择线下转账
         time.sleep(5)
-
         ddtext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
         ddtext2 = '订单提交成功，请尽快付款！'
         try:
@@ -142,12 +142,9 @@ class Test_watch_vido(unittest.TestCase):
         else:
             print("Test Pass!!!")
 
-
-
         time.sleep(2)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[3]/div[1]/div/input').send_keys("tester")
         time.sleep(5)
-
         driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div[3]/div[2]/div[2]/div[1]/div').click()  # 上传图片
         # driver.find_elements_by_class_name("el-upload el-upload--picture-card")[0].click()
         time.sleep(3)  # app > div.underlinepay.box > div.underlinepay_body > div:nth-child(4) > div:nth-child(1)
@@ -179,7 +176,6 @@ class Test_watch_vido(unittest.TestCase):
             print("")
             check_box
     """
-
     # sub_down.click()
     def Buy_classes(self):
         self.Login()
@@ -193,9 +189,8 @@ class Test_watch_vido(unittest.TestCase):
         time.sleep(5)
         # 选择课程
         driver.find_elements_by_class_name("intro")[0].click()
-        time.sleep(5)
+        #time.sleep(5)
         #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[1]/span').click()  # 选择中学
-
         # time.sleep(3)
         # driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[1]/span').click()
         # driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span').click()
@@ -207,7 +202,6 @@ class Test_watch_vido(unittest.TestCase):
         # a = driver.find_elements_by_class_name("norms_item norms_item_enable")
         # 获取级别
         # ========级别=======学科========地区=========================
-
         a = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[1]/span')
         b = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[2]/span')
         c = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[3]/span')
@@ -232,9 +226,7 @@ class Test_watch_vido(unittest.TestCase):
         s = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[18]/span')  # 心里健康
         j = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[19]/span')  # 小学全科
         o = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[20]/span')  # 幼儿园
-
         # 地区ea
-
         area1 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span')  # 北京
         area2 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[2]/span')  # 天津
         area3 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[3]/span')  # 河北
@@ -242,21 +234,84 @@ class Test_watch_vido(unittest.TestCase):
         area5 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[8]/span')  # 重庆
         area7 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[7]/span')  # 四川
         area6 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[9]/span')  # 江苏
-        area8 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[10]/span')  # 浙江
-        area9 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[12]/span')  # 安徽
-        area10 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[14]/span')  # 全国通用
-        area11 = driver.find_element_by_xpath(
-            '/html/body/div[1]/div[2]/div[2]/div/div[9]/div/div[2]/div[15]/span')  # 上海
-        area12 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[16]/span')  # 校园
-        Jibies = [a, b, c]
-        Xuekes = [d, e, f, g, k, i, l, z, x, v, n, m, pp, r, t, y, u, s, j, o]
-        areas = [area1, area2, area3, area4, area5, area6, area7, area8, area9, area10, area11, area12]
-
+        area8 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[10]/span') # 浙江
+        area9 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[12]/span') # 安徽
+        area10 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[14]/span')# 全国通用
+        area11 = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div/div[9]/div/div[2]/div[15]/span')#上海
+        area12 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[16]/span')# 校园
+        #获取级别列表
+        jibie=[a,b,c]
+        Xuekes=[d, e, f, g, k, i, l, z, x, v, n, m, pp, r, t, y, u, s, j, o]
+        areas=[area1, area2, area3, area4, area5, area6, area7, area8, area9, area10, area11, area12]
         # 分别获取级别、班级、地区 状态为True 的元素，并自定义点击选择
-        #jb = []
-        xk = []
-        area = []
+        #jb=[]
+        #xk=[]
+        #area=[]
+        try:
+            jb = []
+            for i in jibie:
+                jibies = jibie.pop()
+                if jibies.is_enabled():
+                    jb.append(jibies)
+                    #print(i.text)
+                    jdtext=jb[0].text
+            print('可选级别:%r'%jdtext)
+            jb[0].click()
 
+            xk = []
+            for x in Xuekes:
+                xueke = Xuekes.pop()
+                if xueke.is_enabled():
+                    xk.append(xueke)
+                    #print(x.text)
+                    xktext=xk[0].text
+            print('可选学科：%r'%xktext)
+            xk[0].click()
+            dq = []
+            for d in areas:
+                area = areas.pop()
+                if area.is_enabled():
+                    dq.append(area)
+                    #print(d.text)
+
+                    dqtext=dq[-1].text
+            print("可选地区：%r"%dqtext)
+            dq[-1].click()
+            print("Test Pass!!")
+        except Exception as e:
+               print("Exception found",format(e))
+    def Buy_classes_two(self):
+        self.Login()
+        driver = self.driver
+        time.sleep(3)
+        # 进入班级课程
+        driver.find_elements_by_class_name("nav_item")[1].click()
+        time.sleep(3)
+        # 选择幼儿
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[2]/div[1]/div[2]/span[4]').click()
+        time.sleep(5)
+        # 选择课程
+        driver.find_elements_by_class_name("intro")[0].click()
+        time.sleep(5)
+        #提交
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/button/span').click()
+        time.sleep(8)
+        #勾选服务协议
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[3]/div[5]/div[4]/label/span[1]/span').click()
+        #提交订单
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[3]/div[7]/div').click()
+        time.sleep(3)
+        #跳转第三方支付
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[3]').click()
+        zftext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
+        zftext2 = '订单提交成功，请尽快付款！'
+        try:
+            assert (zftext == zftext2), 'Test Fail'
+        except AssertionError as msg:
+            print(msg)
+        else:
+            print("Test Pass!!!")
+        """
         while len(Xuekes) > 0:
             xueke = Xuekes.pop()
             if xueke.is_enabled() == True:
@@ -270,7 +325,7 @@ class Test_watch_vido(unittest.TestCase):
                     # return xk
                     # print(xk)
                     # time.sleep()
-                    break
+                   # break
 
         while len(areas) > 0:
 
@@ -280,11 +335,12 @@ class Test_watch_vido(unittest.TestCase):
                 if len(area) == 0:
                     return False
                 else:
-                    area[0].click()
+                    area[-1].click()
                     print("可选择地域：%r" % area)
-                    print(area[-1].click())
-                    break
-
+                    print(area[-1].text)
+                    driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/button').click()
+                    #break
+              """
     def tearDown(self):
         self.driver.quit()
 
@@ -292,11 +348,11 @@ if __name__ == "__main__":
     # 构造测试集
     suit = unittest.TestSuite()
     suit.addTest(Test_watch_vido("watch_Replay"))
-    #suit.addTest(Test_watch_vido("DingDan"))
-    #suit.addTest(Test_watch_vido("Buy_classes"))
+    suit.addTest(Test_watch_vido("DingDan"))
+    suit.addTest(Test_watch_vido("Buy_classes"))
+    suit.addTest(Test_watch_vido("Buy_classes_two"))
     # 案例执行
     runner = unittest.TextTestRunner()
-
     # 报告保存路径
     # 报告路径
     date_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
@@ -309,12 +365,11 @@ if __name__ == "__main__":
             tf,
             2,
             title='自动化测试DEMO',
-            description='自动化测试.',
+            description ='自动化测试.',
             tester="XiongfeiQiu"
         )
         runner.run(suit)  # 运行测试用例
         tf.close()
-
 
 
 

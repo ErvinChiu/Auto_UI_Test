@@ -27,7 +27,7 @@ def send_mail(username, passwd, recv, title, content, mail_host='smtp.qq.com', p
 
         # 构建邮件附件
         part_attach1 = MIMEApplication(open(file, 'rb').read())  # 打开附件
-        part_attach1.add_header('Content-Disposition', 'attachment', filename =pathlib.Path(file).name)  # 为附件命名
+        part_attach1.add_header('Content-Disposition', 'attachment', filename = pathlib.Path(file).name)  # 为附件命名
         msg.attach(part_attach1)  # 添加附件
     else:
         msg = MIMEText(content)  # 邮件内容
@@ -46,11 +46,11 @@ receive_address = "qiuxiongfei@jushiwangedu.com"
 title = "聚师网UI自动化测试报告"
 content = "Hi，你好！此邮件为自动发送，不必回复~详情请查看附件，如有疑问可联系测试组~"
 attachfilepath = r"D:\PycharmProjects\JS_UIAuto_Test\Test_Report"
-lists=os.listdir(attachfilepath)
+lists = os.listdir(attachfilepath)
 lists.sort(key=lambda fn: os.path.getmtime(attachfilepath+"\\"+fn))
 file = os.path.join(attachfilepath,lists[-1])
 send_mail(send_address, send_password, receive_address, title, content, file=file)
-print('send success')
+print('Email Send Success!!')
 
 
 
