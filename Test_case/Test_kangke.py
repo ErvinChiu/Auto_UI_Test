@@ -177,7 +177,7 @@ class Test_watch_vido(unittest.TestCase):
             check_box
     """
     # sub_down.click()
-    def Buy_classes(self):
+    def Buy_classes_one(self):
         self.Login()
         driver = self.driver
         time.sleep(3)
@@ -226,7 +226,7 @@ class Test_watch_vido(unittest.TestCase):
         s = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[18]/span')  # 心里健康
         j = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[19]/span')  # 小学全科
         o = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[20]/span')  # 幼儿园
-        # 地区ea
+        # 地区
         area1 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span')  # 北京
         area2 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[2]/span')  # 天津
         area3 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[3]/span')  # 河北
@@ -257,7 +257,6 @@ class Test_watch_vido(unittest.TestCase):
                     jdtext=jb[0].text
             print('可选级别:%r'%jdtext)
             jb[0].click()
-
             xk = []
             for x in Xuekes:
                 xueke = Xuekes.pop()
@@ -273,7 +272,6 @@ class Test_watch_vido(unittest.TestCase):
                 if area.is_enabled():
                     dq.append(area)
                     #print(d.text)
-
                     dqtext=dq[-1].text
             print("可选地区：%r"%dqtext)
             dq[-1].click()
@@ -349,7 +347,7 @@ if __name__ == "__main__":
     suit = unittest.TestSuite()
     suit.addTest(Test_watch_vido("watch_Replay"))
     suit.addTest(Test_watch_vido("DingDan"))
-    suit.addTest(Test_watch_vido("Buy_classes"))
+    suit.addTest(Test_watch_vido("Buy_classes_one"))
     suit.addTest(Test_watch_vido("Buy_classes_two"))
     # 案例执行
     runner = unittest.TextTestRunner()
