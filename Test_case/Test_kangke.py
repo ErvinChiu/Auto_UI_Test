@@ -115,9 +115,10 @@ class Test_watch_vido(unittest.TestCase):
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/button').click()
         time.sleep(3)
         driver.find_element_by_xpath(
-            '//*[@id="app"]/div[2]/div/div[3]/div[4]/div[4]/label/span[1]/span').click()  # checkbox
+            '//*[@id="app"]/div[2]/div/div[3]/div[5]/div[4]/label/span[1]/span').click()  # checkbox
         time.sleep(3)
-        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[3]/div[6]/div').click()
+        #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[3]/div[6]/div').click()#提交订单
+        driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[3]/div[7]/div').click()
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[3]').click()
         #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[1]/div[6]/span').click()  # 选择线下转账
@@ -345,10 +346,10 @@ class Test_watch_vido(unittest.TestCase):
 if __name__ == "__main__":
     # 构造测试集
     suit = unittest.TestSuite()
-    suit.addTest(Test_watch_vido("watch_Replay"))
+    #suit.addTest(Test_watch_vido("watch_Replay"))
     suit.addTest(Test_watch_vido("DingDan"))
-    suit.addTest(Test_watch_vido("Buy_classes_one"))
-    suit.addTest(Test_watch_vido("Buy_classes_two"))
+    #suit.addTest(Test_watch_vido("Buy_classes_one"))
+    #suit.addTest(Test_watch_vido("Buy_classes_two"))
     # 案例执行
     runner = unittest.TextTestRunner()
     # 报告保存路径
@@ -362,8 +363,8 @@ if __name__ == "__main__":
         runner = HTMLTestRunnerNew.HTMLTestRunner(
             tf,
             2,
-            title='自动化测试DEMO',
-            description ='自动化测试.',
+            title = '自动化测试DEMO',
+            description = '自动化测试.',
             tester="XiongfeiQiu"
         )
         runner.run(suit)  # 运行测试用例
