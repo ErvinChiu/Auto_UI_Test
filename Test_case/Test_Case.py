@@ -365,8 +365,8 @@ if __name__ == "__main__":
             runner = HTMLTestRunnerNew.HTMLTestRunner(
                 tf,
                 2,
-                title = '聚师网自动化测试',
-                description = '自动化测试.',
+                title = '聚师网UI自动化测试',
+                description = '自动化测试报告',
                     tester="XiongfeiQiu"
                 )
             runner.run(suit)  # 运行测试用例
