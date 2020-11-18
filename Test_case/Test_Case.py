@@ -98,7 +98,7 @@ class Test_JS_Cases(unittest.TestCase):
         except AssertionError as msg:
             print(msg)
         else:
-            print("测试结果：Test Fail!!!")
+            print("测试结果:Test Fail!!!")
 
     @rerun(count=1, interval=5)
     def Test_Order(self):
@@ -129,7 +129,7 @@ class Test_JS_Cases(unittest.TestCase):
         except AssertionError as msg:
             print(msg)
         else:
-            print("\n%r\n测试结果：Test Pass!!"%ordertext)
+            print("\n%r\n测试结果:Test Pass!!"%ordertext)
 
         """
         #driver.find_elements_by_class_name("payorder_btn")[0].click()
@@ -252,8 +252,8 @@ class Test_JS_Cases(unittest.TestCase):
                 if jibies.is_enabled():
                     jb.append(jibies)
                     #print(i.text)
-                    jdtext=jb[0].text
-            print('可选级别:%r'%jdtext)
+                    leveltext=jb[0].text
+            print('\n可选级别:%r'%leveltext)
             jb[0].click()
             xk = []
             for x in Xuekes:
@@ -261,8 +261,8 @@ class Test_JS_Cases(unittest.TestCase):
                 if xueke.is_enabled():
                     xk.append(xueke)
                     #print(x.text)
-                    xktext=xk[0].text
-            print('可选学科：%r'%xktext)
+                    Subtext=xk[0].text
+            print('可选学科:%r'%Subtext)
             xk[0].click()
             dq = []
             for d in areas:
@@ -271,9 +271,9 @@ class Test_JS_Cases(unittest.TestCase):
                     dq.append(area)
                     #print(d.text)
                     dqtext=dq[-1].text
-            print("可选地区：%r"%dqtext)
+            print("可选地区:%r"%dqtext)
             dq[-1].click()
-            print("测试结果：Test Pass!!")
+            print("测试结果:Test Pass!!")
         except Exception as e:
                print("Exception found",format(e))
 
@@ -301,14 +301,14 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(3)
         #跳转第三方支付
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[3]').click()
-        zftext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
-        zftext2 = '订单提交成功，请尽快付款！'
+        Paytext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
+        Paytext2 = '订单提交成功，请尽快付款！'
         try:
-            assert (zftext == zftext2), '测试结果：Test Fail'
+            assert (Paytext == Paytext2), '测试结果：Test Fail!!!'
         except AssertionError as msg:
             print(msg)
         else:
-            print("测试结果：Test Pass!!!")
+            print("\n%r\n测试结果:Test Pass!!!"%Paytext)
 
     def tearDown(self):
         self.driver.quit()
