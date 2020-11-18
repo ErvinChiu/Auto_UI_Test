@@ -9,7 +9,7 @@ import unittest
 import time
 
 class public_def():
-    @rerun(count=1, interval=5)
+    #登录开始
     def login(self):
         driver = webdriver.Chrome()
         driver.get("https://betaweb.jushixl.net.cn/#/home")
@@ -24,15 +24,16 @@ class public_def():
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/button').click()
     # 登录结束
-
 class Test_JS_Cases(unittest.TestCase):
     @rerun(count=1,interval=5)
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        #初始化浏览器会话
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
+        self.driver = webdriver.Chrome(options=self.chrome_options)
         self.url = "https://betaweb.jushixl.net.cn/#/home"
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
-
     def Login(self):
         # 开始登录
         driver = self.driver
@@ -48,8 +49,7 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/button').click()
         # 结束登录
-
-    # ===================================上传图片===========================
+    #=======================================================上传图片=====================================================
     def upload_chrome(self, filepath):
         # 一级窗口
         dialog = win32gui.FindWindow("#32770", "打开")
@@ -69,7 +69,6 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(5)
         # file_path = r"D:\PycharmProjects\JS_UIAuto_Test\test_data\001.png"
         # upload_chrome(file_path)
-
     @rerun(count=1, interval=5)
     def Test_watch_Replay(self):
 
@@ -87,22 +86,19 @@ class Test_JS_Cases(unittest.TestCase):
         driver.switch_to.window(windows_handle[-1])  # 切换到最新窗口
         time.sleep(5)
         driver.switch_to.frame([0][0])  # 切换到frame
-        # 定位时间进度
-
-        time_test = driver.find_elements_by_class_name("time")[0].text
-        print(time_test)
-        time.sleep(10)
-        time_test01 = driver.find_elements_by_class_name("time")[0].text
-        print(time_test01)
+        # 定位获取时间进度
+        time_test = driver.find_elements_by_class_name("time")[0].text#获取初始时间
+        print( "\n初始时间为%r:"%time_test)
+        time.sleep(5)
+        time_test01 = driver.find_elements_by_class_name("time")[0].text#获取进度时间
+        print("进度时间为%r:"%time_test01)
         # self.assertEqual(time_test,init_time)
         try:
-            assert (time_test == time_test01), 'Test Pass'
+            assert (time_test == time_test01), '测试结果：Test Pass!!'
         except AssertionError as msg:
             print(msg)
         else:
-            print("Test Fail!!!")
-
-        time.sleep(5)
+            print("测试结果：Test Fail!!!")
 
     @rerun(count=1, interval=5)
     def Test_Order(self):
@@ -124,16 +120,16 @@ class Test_JS_Cases(unittest.TestCase):
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[3]/div[7]/div').click()
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[3]').click()
-        #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[1]/div[6]/span').click()  # 选择线下转账
+        #driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[4]/div/div[1]/div[6]/span').click()  # 选择线下转账（取消功能）
         time.sleep(5)
-        ddtext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
-        ddtext2 = '订单提交成功，请尽快付款！'
+        ordertext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
+        ordertext2 = '订单提交成功，请尽快付款！'
         try:
-            assert (ddtext == ddtext2), 'Test Fail'
+            assert (ordertext == ordertext2), '测试结果：Test Fail'
         except AssertionError as msg:
             print(msg)
         else:
-            print("Test Pass!!!")
+            print("\n%r\n测试结果：Test Pass!!"%ordertext)
 
         """
         #driver.find_elements_by_class_name("payorder_btn")[0].click()
@@ -178,8 +174,7 @@ class Test_JS_Cases(unittest.TestCase):
             print("")
             check_box
     """
-    # sub_down.click()
-    @rerun(count=1, interval=5)
+    @rerun(count=2, interval=20)
     def Test_Buy_classes_one(self):
         self.Login()
         driver = self.driver
@@ -204,18 +199,18 @@ class Test_JS_Cases(unittest.TestCase):
         # print(dis1.is_displayed())
         # a = driver.find_elements_by_class_name("norms_item norms_item_enable")
         # 获取级别
-        # ========级别=======学科========地区=========================
+        # =======================================级别===================================================================
         a = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[1]/span')
         b = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[2]/span')
         c = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[7]/div/div[2]/div[3]/span')
-        # 学科
+        # =======================================学科===================================================================
         d = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[1]/span')  # 语文
         e = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[2]/span')  # 数学
         f = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[3]/span')  # 英语
         g = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[4]/span')  # 音乐
         k = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[5]/span')  # 体育
         i = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[6]/span')  # 美术
-        l = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[7]/span')  # 物理
+        ll = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[7]/span')  # 物理
         z = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[8]/span')  # 化学
         x = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[9]/span')  # 生物
         v = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[10]/span')  # 政治
@@ -229,7 +224,7 @@ class Test_JS_Cases(unittest.TestCase):
         s = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[18]/span')  # 心里健康
         j = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[19]/span')  # 小学全科
         o = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[20]/span')  # 幼儿园
-        # 地区
+        # =====================================================地区=====================================================
         area1 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[1]/span')  # 北京
         area2 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[2]/span')  # 天津
         area3 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[9]/div/div[2]/div[3]/span')  # 河北
@@ -244,7 +239,7 @@ class Test_JS_Cases(unittest.TestCase):
         area12 = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/div[8]/div/div[2]/div[16]/span')# 校园
         #获取级别列表
         jibie=[a,b,c]
-        Xuekes=[d, e, f, g, k, i, l, z, x, v, n, m, pp, r, t, y, u, s, j, o]
+        Xuekes=[d, e, f, g, k, i, ll, z, x, v, n, m, pp, r, t, y, u, s, j, o]
         areas=[area1, area2, area3, area4, area5, area6, area7, area8, area9, area10, area11, area12]
         # 分别获取级别、班级、地区 状态为True 的元素，并自定义点击选择
         #jb=[]
@@ -278,11 +273,11 @@ class Test_JS_Cases(unittest.TestCase):
                     dqtext=dq[-1].text
             print("可选地区：%r"%dqtext)
             dq[-1].click()
-            print("Test Pass!!")
+            print("测试结果：Test Pass!!")
         except Exception as e:
                print("Exception found",format(e))
 
-    @rerun(count=1, interval=5)
+    @rerun(count=1, interval=30)
     def Test_Buy_classes_two(self):
         self.Login()
         driver = self.driver
@@ -309,39 +304,12 @@ class Test_JS_Cases(unittest.TestCase):
         zftext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
         zftext2 = '订单提交成功，请尽快付款！'
         try:
-            assert (zftext == zftext2), 'Test Fail'
+            assert (zftext == zftext2), '测试结果：Test Fail'
         except AssertionError as msg:
             print(msg)
         else:
-            print("Test Pass!!!")
-        """
-        while len(Xuekes) > 0:
-            xueke = Xuekes.pop()
-            if xueke.is_enabled() == True:
-                xk.append(xueke)
-                if len(xk) == 0:
-                    return False
-                else:
-                    xk[0].click()
-                    print("可选择学科：%r" % xk)
-                    print(xk[0].text)
-                    # return xk
-                    # print(xk)
-                    # time.sleep()
-                   # break
-        while len(areas) > 0:
-            ar = areas.pop()
-            if ar.is_enabled() == True:
-                area.append(ar)
-                if len(area) == 0:
-                    return False
-                else:
-                    area[-1].click()
-                    print("可选择地域：%r" % area)
-                    print(area[-1].text)
-                    driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div/button').click()
-                    #break
-              """
+            print("测试结果：Test Pass!!!")
+
     def tearDown(self):
         self.driver.quit()
 
@@ -352,10 +320,11 @@ if __name__ == "__main__":
     suit.addTest(Test_JS_Cases("Test_Order"))
     suit.addTest(Test_JS_Cases("Test_Buy_classes_one"))
     suit.addTest(Test_JS_Cases("Test_Buy_classes_two"))
-            # 案例执行
-    runner = unittest.TextTestRunner()
+    # 案例执行
+    #runner = unittest.TextTestRunner()
     # 报告保存路径
     # 报告路径
+
     date_time = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
     report_abspath = date_time + '.html'
     Re_local = 'D:\PycharmProjects\JS_UIAuto_Test\Test_Report\Test_Report'
@@ -367,7 +336,7 @@ if __name__ == "__main__":
                 2,
                 title = '聚师网UI自动化测试',
                 description = '自动化测试报告',
-                    tester="XiongfeiQiu"
+                tester="XiongfeiQiu"
                 )
             runner.run(suit)  # 运行测试用例
             tf.close()
