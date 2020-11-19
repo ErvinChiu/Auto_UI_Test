@@ -1,14 +1,27 @@
-# coding: utf-8
+#-*-coding:utf-8-*-
+#@Time    :2020/11/11 15:04
+#@Author  :JS_ErvinChiu
+#@Email   :qiuxiongfei@jushiwangedu.com
+#@File    :Test_Case.py
+#@Software:PyCharm
 #from selenium.webdriver.support.select import Select
-import HTMLTestRunnerNew
+#from selenium.webdriver.common.keys import Keys
+
 import win32con
 import win32gui
 from selenium import webdriver
 from unittestreport import rerun
+from unittestreport import TestRunner
 import unittest
 import time
+import HTML
+import os
+import HTMLTestRunnerNew
+
+
 
 class public_def():
+
     #登录开始
     def login(self):
         driver = webdriver.Chrome()
@@ -23,10 +36,13 @@ class public_def():
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/div[4]/input').send_keys("a123456")
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/button').click()
+
     # 登录结束
 class Test_JS_Cases(unittest.TestCase):
-    @rerun(count=1,interval=5)
+
+    @rerun(count=2,interval=5)
     def setUp(self):
+
         #初始化浏览器会话
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
@@ -34,6 +50,7 @@ class Test_JS_Cases(unittest.TestCase):
         self.url = "https://betaweb.jushixl.net.cn/#/home"
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
+
     def Login(self):
         # 开始登录
         driver = self.driver
@@ -69,8 +86,9 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(5)
         # file_path = r"D:\PycharmProjects\JS_UIAuto_Test\test_data\001.png"
         # upload_chrome(file_path)
-    @rerun(count=1, interval=5)
-    def Test_watch_Replay(self):
+    @rerun(count=2, interval=5)
+    #@unittest.skip("测试跳过用例")
+    def test_watch_replay(self):
 
         self.Login()
         driver = self.driver
@@ -89,7 +107,7 @@ class Test_JS_Cases(unittest.TestCase):
         # 定位获取时间进度
         time_test = driver.find_elements_by_class_name("time")[0].text#获取初始时间
         print( "\n初始时间为%r:"%time_test)
-        time.sleep(5)
+        time.sleep(10)
         time_test01 = driver.find_elements_by_class_name("time")[0].text#获取进度时间
         print("进度时间为%r:"%time_test01)
         # self.assertEqual(time_test,init_time)
@@ -97,11 +115,13 @@ class Test_JS_Cases(unittest.TestCase):
             assert (time_test == time_test01), '测试结果：Test Pass!!'
         except AssertionError as msg:
             print(msg)
+
         else:
             print("测试结果:Test Fail!!!")
 
-    @rerun(count=1, interval=5)
-    def Test_Order(self):
+
+    @rerun(count=2, interval=5)
+    def test_Order(self):
 
         self.Login()
         driver = self.driver
@@ -124,12 +144,15 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(5)
         ordertext = driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[2]/div[1]/span[1]').text
         ordertext2 = '订单提交成功，请尽快付款！'
+
         try:
             assert (ordertext == ordertext2), '测试结果：Test Fail'
+
         except AssertionError as msg:
             print(msg)
         else:
             print("\n%r\n测试结果:Test Pass!!"%ordertext)
+
 
         """
         #driver.find_elements_by_class_name("payorder_btn")[0].click()
@@ -175,7 +198,7 @@ class Test_JS_Cases(unittest.TestCase):
             check_box
     """
     @rerun(count=2, interval=20)
-    def Test_Buy_classes_one(self):
+    def test_Buy_classes_one(self):
         self.Login()
         driver = self.driver
         time.sleep(3)
@@ -241,7 +264,7 @@ class Test_JS_Cases(unittest.TestCase):
         jibie=[a,b,c]
         Xuekes=[d, e, f, g, k, i, ll, z, x, v, n, m, pp, r, t, y, u, s, j, o]
         areas=[area1, area2, area3, area4, area5, area6, area7, area8, area9, area10, area11, area12]
-        # 分别获取级别、班级、地区 状态为True 的元素，并自定义点击选择
+        #分别获取级别、班级、地区 状态为True 的元素，并自定义点击选择
         #jb=[]
         #xk=[]
         #area=[]
@@ -277,8 +300,9 @@ class Test_JS_Cases(unittest.TestCase):
         except Exception as e:
                print("Exception found",format(e))
 
+
     @rerun(count=1, interval=30)
-    def Test_Buy_classes_two(self):
+    def test_Buy_classes_two(self):
         self.Login()
         driver = self.driver
         time.sleep(3)
@@ -305,23 +329,35 @@ class Test_JS_Cases(unittest.TestCase):
         Paytext2 = '订单提交成功，请尽快付款！'
         try:
             assert (Paytext == Paytext2), '测试结果：Test Fail!!!'
+
         except AssertionError as msg:
             print(msg)
+
         else:
             print("\n%r\n测试结果:Test Pass!!!"%Paytext)
 
     def tearDown(self):
+
         self.driver.quit()
 
+#添加测试用例类
+suite = unittest.defaultTestLoader.loadTestsFromTestCase(Test_JS_Cases)
+#生成测试报告
+runner = TestRunner(suite=suite)
+runner.run()
+
+"""
 if __name__ == "__main__":
     # 构造测试集
     suit = unittest.TestSuite()
     suit.addTest(Test_JS_Cases("Test_watch_Replay"))
-    suit.addTest(Test_JS_Cases("Test_Order"))
-    suit.addTest(Test_JS_Cases("Test_Buy_classes_one"))
-    suit.addTest(Test_JS_Cases("Test_Buy_classes_two"))
+    #suit.addTest(Test_JS_Cases("Test_Order"))
+    #suit.addTest(Test_JS_Cases("Test_Buy_classes_one"))
+    #suit.addTest(Test_JS_Cases("Test_Buy_classes_two"))
     # 案例执行
-    #runner = unittest.TextTestRunner()
+    #runner = unittest.TestRunner(suite=suit)
+
+
     # 报告保存路径
     # 报告路径
 
@@ -330,6 +366,7 @@ if __name__ == "__main__":
     Re_local = 'D:\PycharmProjects\JS_UIAuto_Test\Test_Report\Test_Report'
     report_local = Re_local + report_abspath
     # 定义测试报告
+   
     with open(report_local, 'wb+') as tf:
             runner = HTMLTestRunnerNew.HTMLTestRunner(
                 tf,
@@ -340,3 +377,16 @@ if __name__ == "__main__":
                 )
             runner.run(suit)  # 运行测试用例
             tf.close()
+
+    with open(report_local, 'wb+') as tf:
+        runner = HTMLTestRunnerNew.HTMLTestRunner(
+            tf,
+            2,
+            title='聚师网UI自动化测试',
+            description='自动化测试报告',
+            tester="XiongfeiQiu"
+        )
+        runner.run(suit)  # 运行测试用例
+        tf.close()
+"""
+

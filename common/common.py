@@ -1,6 +1,7 @@
 from robot.libraries.BuiltIn import logger
 from robot.libraries.BuiltIn import BuiltIn
-
+import time
+import logging
 # 存储 robotframework BuiltIn实例对象
 # 通过它可以调用任意 内置关键字对应的函数
 # 比如
@@ -59,3 +60,16 @@ def CHECK_POINT(desc, condition):
 #     else:
 #         print('\033[31m---->   !! 不通过!! \033[0m')
 #         raise AssertionError(f'\n** 检查点不通过 **  {desc} ' )
+class Screen(object):
+    def __init__(self, driver):
+        self.driver = driver
+
+    def __call__(self, func):
+        def inner(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except:
+                now_time = time.strftime('%Y_%m_%d_%H_%M_%S')   # 异常时，截图
+                self.driver.get_screenshot_as_file(f'{now_time}.png')
+                raise   # 抛出异常，不然会认为测试用例执行通过
+        return inner
