@@ -20,6 +20,7 @@ import HTMLTestRunnerNew
 
 
 
+"""
 class public_def():
 
     #登录开始
@@ -38,9 +39,10 @@ class public_def():
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/button').click()
 
     # 登录结束
+    """
 class Test_JS_Cases(unittest.TestCase):
 
-    @rerun(count=2,interval=5)
+    #@rerun(count=2,interval=5)
     def setUp(self):
 
         #初始化浏览器会话
@@ -86,8 +88,8 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(5)
         # file_path = r"D:\PycharmProjects\JS_UIAuto_Test\test_data\001.png"
         # upload_chrome(file_path)
-    @rerun(count=2, interval=5)
-    #@unittest.skip("测试跳过用例")
+    #@rerun(count=2, interval=5)
+    @unittest.skip("测试跳过用例")
     def test_watch_replay(self):
 
         self.Login()
@@ -107,7 +109,7 @@ class Test_JS_Cases(unittest.TestCase):
         # 定位获取时间进度
         time_test = driver.find_elements_by_class_name("time")[0].text#获取初始时间
         print( "\n初始时间为%r:"%time_test)
-        time.sleep(10)
+        time.sleep(8)
         time_test01 = driver.find_elements_by_class_name("time")[0].text#获取进度时间
         print("进度时间为%r:"%time_test01)
         # self.assertEqual(time_test,init_time)
@@ -119,14 +121,13 @@ class Test_JS_Cases(unittest.TestCase):
         else:
             print("测试结果:Test Fail!!!")
 
-
-    @rerun(count=2, interval=5)
+    #@rerun(count=2, interval=5)
     def test_Order(self):
 
         self.Login()
         driver = self.driver
         time.sleep(3)
-        driver.find_elements_by_class_name("nav_item")[1].click()  # 进入班级课程
+        driver.find_elements_by_class_name("nav_item")[1].click()  # 进入班级课程[1]
         time.sleep(3)
         driver.find_elements_by_class_name("pic")[0].click()
         time.sleep(5)
@@ -197,7 +198,8 @@ class Test_JS_Cases(unittest.TestCase):
             print("")
             check_box
     """
-    @rerun(count=2, interval=20)
+    #@rerun(count=2, interval=20)
+    @unittest.skip("演示跳过用例")
     def test_Buy_classes_one(self):
         self.Login()
         driver = self.driver
@@ -300,15 +302,15 @@ class Test_JS_Cases(unittest.TestCase):
         except Exception as e:
                print("Exception found",format(e))
 
-
-    @rerun(count=1, interval=30)
+    @unittest.skip("验证邮件")
+    #@rerun(count=1, interval=30)
     def test_Buy_classes_two(self):
         self.Login()
         driver = self.driver
         time.sleep(3)
         # 进入班级课程
         driver.find_elements_by_class_name("nav_item")[1].click()
-        time.sleep(3)
+        #time.sleep(3)
         # 选择幼儿
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div[2]/div[1]/div[2]/span[4]').click()
         time.sleep(5)
@@ -344,7 +346,13 @@ class Test_JS_Cases(unittest.TestCase):
 suite = unittest.defaultTestLoader.loadTestsFromTestCase(Test_JS_Cases)
 #生成测试报告
 runner = TestRunner(suite=suite)
-runner.run()
+#runner.run()
+runner.rerun_run(count=1, interval=5)
+runner.send_email(host="smtp.qq.com",
+                  port=465,
+                  user="2551451515@qq.com",
+                  password="boqvynjdduztecgj",
+                  to_addrs="qiuxiongfei@jushiwangedu.com")
 
 """
 if __name__ == "__main__":
