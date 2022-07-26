@@ -121,7 +121,7 @@ class Test_JS_Cases(unittest.TestCase):
         else:
             print("测试结果:Test Fail!!!")
 
-    #@rerun(count=2, interval=5)
+    @rerun(count=2, interval=5)
     def test_Order(self):
 
         self.Login()
@@ -302,8 +302,8 @@ class Test_JS_Cases(unittest.TestCase):
         except Exception as e:
                print("Exception found",format(e))
 
-    @unittest.skip("验证邮件")
-    #@rerun(count=1, interval=30)
+    #@unittest.skip("验证邮件")
+    @rerun(count=1, interval=30)
     def test_Buy_classes_two(self):
         self.Login()
         driver = self.driver
