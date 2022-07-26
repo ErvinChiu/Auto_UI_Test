@@ -68,6 +68,7 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(3)
         driver.find_element_by_xpath('//*[@id="app"]/div[2]/div/div/div/div[2]/button').click()
         # 结束登录
+    """
     #=======================================================上传图片=====================================================
     def upload_chrome(self, filepath):
         # 一级窗口
@@ -88,8 +89,9 @@ class Test_JS_Cases(unittest.TestCase):
         time.sleep(5)
         # file_path = r"D:\PycharmProjects\JS_UIAuto_Test\test_data\001.png"
         # upload_chrome(file_path)
-    #@rerun(count=2, interval=5)
-    @unittest.skip("测试跳过用例")
+        """
+    @rerun(count=2, interval=5)
+    #@unittest.skip("测试跳过用例")
     def test_watch_replay(self):
 
         self.Login()
