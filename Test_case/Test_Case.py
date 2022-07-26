@@ -7,16 +7,16 @@
 #from selenium.webdriver.support.select import Select
 #from selenium.webdriver.common.keys import Keys
 
-import win32con
-import win32gui
+#import win32con
+#import win32gui
 from selenium import webdriver
 from unittestreport import rerun
 from unittestreport import TestRunner
 import unittest
 import time
-import HTML
+#import HTML
 import os
-import HTMLTestRunnerNew
+#import HTMLTestRunnerNew
 
 
 
