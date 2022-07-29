@@ -42,7 +42,7 @@ class public_def():
     """
 class Test_JS_Cases(unittest.TestCase):
 
-    #@rerun(count=2,interval=5)
+    @rerun(count=2,interval=5)
     def setUp(self):
 
         #初始化浏览器会话
